@@ -1,0 +1,30 @@
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Django local settings
+*.sqlite3
+*.log
+
+# Static files collected for production
+/staticfiles/
+# Ignore node_modules if you have any
+node_modules/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secret environment variables
+.env

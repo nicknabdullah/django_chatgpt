@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ChatGPT Simulator</title>
+    <link rel="stylesheet" href="{% static 'chat_app/style.css' %}">
+</head>
+<body>
+    <div id="chat-container">
+        <h2>ChatGPT Simulator</h2>
+
+        <!-- Chat display -->
+        <div id="chat-box"></div>
+
+        <!-- Form: model + input + send button -->
+        <form id="chat-form">
+            <select id="model" name="model">
+                <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+                <option value="gpt-4o">gpt-4o</option>
+                <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+            </select>
+
+            <input type="text" id="message" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </form>
+
+        <!-- Reset chat button -->
+        <button id="reset-chat">Reset Chat</button>
+    </div>
+
+    <script src="{% static 'chat_app/script.js' %}"></script>
+</body>
+</html>
