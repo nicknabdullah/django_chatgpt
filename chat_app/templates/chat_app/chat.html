@@ -2,33 +2,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>ChatGPT Simulator</title>
-    <link rel="stylesheet" href="{% static 'chat_app/style.css' %}">
+  <meta charset="UTF-8">
+  <title>ChatGPT Simulator</title>
+
+  <!-- Link to CSS for styling -->
+  <link rel="stylesheet" href="{% static 'chat_app/style.css' %}">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 <body>
-    <div id="chat-container">
-        <h2>ChatGPT Simulator</h2>
+  <div id="chat-container">
 
-        <!-- Chat display -->
-        <div id="chat-box"></div>
+    <!-- Header -->
+    <h2>ChatGPT Simulator</h2>
 
-        <!-- Form: model + input + send button -->
-        <form id="chat-form">
-            <select id="model" name="model">
-                <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
-                <option value="gpt-4o">gpt-4o</option>
-                <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
-            </select>
-
-            <input type="text" id="message" placeholder="Type your message..." required>
-            <button type="submit">Send</button>
-        </form>
-
-        <!-- Reset chat button -->
-        <button id="reset-chat">Reset Chat</button>
+    <!-- Chat area -->
+    <!-- Pre-rendered chat history from Django session -->
+    <div id="chat-box">
+      {% for msg in chat_history %}
+        {% if msg.role == "user" %}
+          <div class="user"><p>{{ msg.content }}</p></div>
+        {% elif msg.role == "assistant" %}
+          <div class="bot"><p>{{ msg.content }}</p></div>
+        {% endif %}
+      {% endfor %}
     </div>
 
-    <script src="{% static 'chat_app/script.js' %}"></script>
+    <!-- Input row (model + input box + icons) -->
+    <div id="chat-input-container">
+      <!-- Model selector -->
+      <select id="model" name="model">
+        <option value="gpt-4o-mini" selected>gpt-4o-mini</option>
+        <option value="gpt-4o">gpt-4o</option>
+        <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+      </select>
+
+      <!-- Input + buttons -->
+      <div id="input-wrapper">
+        <!-- Text input -->
+        <input type="text" id="message" placeholder="Type your message..." autocomplete="off">
+        <!-- Send button -->
+        <button id="send-btn" title="Send"><i class="fas fa-paper-plane"></i></button>
+        <!-- Reset button -->
+        <button id="reset-chat" title="Reset"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include JS for chat logic -->
+  <script src="{% static 'chat_app/script.js' %}"></script>
 </body>
 </html>
